@@ -86,8 +86,10 @@ function extractWebhookReqBody(trigger) {
         retrieveCurrencyPrice.get(resp.text)
         .then(resp => {
             sendMessage.post(resp.text, {
-                "toPersonId": trigger.data.personId,
-                "text" : resp.text
+                console.log(trigger.data.personId);
+                console.log(resp.text)
+                // "toPersonId": trigger.data.personId,
+                // "text" : resp.text
             })
             .catch(console.log)
         })
