@@ -87,6 +87,7 @@ function extractWebhookReqBody(trigger) {
         .then(resp => {
             console.log(resp);
         })
+        .catch(console.log);
     })
     .catch(console.log);
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
