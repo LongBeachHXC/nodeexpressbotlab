@@ -26,7 +26,7 @@ var retrieveMessageData = new RequestClient({
 })
 
 var retrieveCurrencyPrice = new RequestClient({
-    "baseUrl": "https://api.binance.com/api/v3/ticker/price?symbol="
+    "baseUrl": "https://api.binance.com/api/v3/ticker/"
 })
 
 var sendMessage = new RequestClient({
@@ -83,7 +83,11 @@ app.listen(port, function () {
 function extractWebhookReqBody(trigger) {
     retrieveMessageData.get(trigger.data.id)
     .then(resp => {
-        retrieveCurrencyPrice.get(resp.text)
+        retrieveCurrencyPrice.get({"uri":"price",
+            "query": {
+                "symbol": resp.text
+            }
+        })
         .then(resp => {
             console.log(resp);
         })
