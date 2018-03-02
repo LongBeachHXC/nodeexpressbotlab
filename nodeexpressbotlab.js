@@ -82,16 +82,16 @@ app.listen(port, function () {
 // Invoked when the Spark webhook is triggered
 function extractWebhookReqBody(trigger) {
     retrieveMessageData.get(trigger.data.id)
-    .then(resp => {
+    .then(currencySymbol => {
         retrieveCurrencyPrice.get({"uri":"price",
             "query": {
-                "symbol": resp.text
+                "symbol": currencySymbol.text
             }
         })
-        .then(resp => {
+        .then(currencyPrice => {
             sendMessage.post("messages", {
                 "toPersonId": trigger.data.personId,
-                "text": resp.price
+                "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
             })
             .then(resp => {
                 console.log(resp);
