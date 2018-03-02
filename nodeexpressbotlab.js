@@ -10,7 +10,6 @@
  */
 
 var express = require("express");
-var Utils = require ("utils");
 var RequestClient = require("reqclient").RequestClient;
 
 var app = express();
