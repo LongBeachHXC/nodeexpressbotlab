@@ -81,26 +81,28 @@ app.listen(port, function () {
 
 // Invoked when the Spark webhook is triggered
 function extractWebhookReqBody(trigger) {
-    retrieveMessageData.get(trigger.data.id)
-    .then(currencySymbol => {
-        retrieveCurrencyPrice.get({"uri":"price",
-            "query": {
-                "symbol": currencySymbol.text
-            }
-        })
-        .then(currencyPrice => {
-            sendMessage.post("messages", {
-                "toPersonId": trigger.data.personId,
-                "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
-            })
-            .then(resp => {
-                console.log(resp);
-            })
-            .catch(console.log);
-        })
-        .catch(console.log);
-    })
-    .catch(console.log);
+    console.log(trigger);
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
 
 }
+
+    // retrieveMessageData.get(trigger.data.id)
+    // .then(currencySymbol => {
+    //     retrieveCurrencyPrice.get({"uri":"price",
+    //         "query": {
+    //             "symbol": currencySymbol.text
+    //         }
+    //     })
+    //     .then(currencyPrice => {
+    //         sendMessage.post("messages", {
+    //             "toPersonId": trigger.data.personId,
+    //             "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
+    //         })
+    //         .then(resp => {
+    //             console.log(resp);
+    //         })
+    //         .catch(console.log);
+    //     })
+    //     .catch(console.log);
+    // })
+    // .catch(console.log);
