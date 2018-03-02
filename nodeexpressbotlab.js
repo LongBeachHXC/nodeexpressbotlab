@@ -79,7 +79,7 @@ function extractWebhookReqBody(trigger) {
     .then(resp => {
         retrieveCurrencyPrice.get(resp.text)
         .then(resp => {
-            console.log(resp)
+            console.log(resp[0])
         })
     })
     .catch(console.log);
