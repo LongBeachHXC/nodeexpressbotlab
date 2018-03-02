@@ -90,6 +90,7 @@ function extractWebhookReqBody(trigger) {
         })
         .then(resp => {
             console.log(resp);
+            console.log(trigger.data.personId);
         })
         .catch(console.log);
     })
