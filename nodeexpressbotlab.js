@@ -30,7 +30,7 @@ var retrieveCurrencyPrice = new RequestClient({
 })
 
 var sendMessage = new RequestClient({
-    "baseUrl": "https://api.ciscospark.com/v1/messages",
+    "baseUrl": "https://api.ciscospark.com/v1/",
     "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
 
 })
@@ -89,8 +89,14 @@ function extractWebhookReqBody(trigger) {
             }
         })
         .then(resp => {
-            console.log(resp);
-            console.log(trigger.data.personId);
+            sendMessage.post("messages", {
+                "toPersonId": trigger.data.personId,
+                "text": resp.price
+            })
+            .then(resp => {
+                console.log(resp);
+            })
+            .catch(console.log);
         })
         .catch(console.log);
     })
