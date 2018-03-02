@@ -30,7 +30,7 @@ var retrieveCurrencyPrice = new RequestClient({
 })
 
 var sendMessage = new RequestClient({
-    "baseUrl": "https://api.ciscospark.com/v1/messages"
+    "baseUrl": "https://api.ciscospark.com/v1/messages",
     "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
 
 })
