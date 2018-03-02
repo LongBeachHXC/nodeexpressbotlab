@@ -90,8 +90,8 @@ function extractWebhookReqBody(trigger) {
                 console.log(resp.text)
                 // "toPersonId": trigger.data.personId,
                 // "text" : resp.text
-            })
-            .catch(console.log)
+            // })
+            // .catch(console.log)
         })
         .catch(console.log)
     })
