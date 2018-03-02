@@ -58,7 +58,7 @@ app.route("/")
         res.status(200).json({message: "message is being processed by webhook"});
 
         // process incoming resource/event, see https://developer.ciscospark.com/webhooks-explained.html
-        processWebhookEvent(req.body);
+        extractWebhookReqBody(req.body);
     });
 
 
@@ -75,19 +75,15 @@ app.listen(port, function () {
 
 
 // Invoked when the Spark webhook is triggered
-function processWebhookEvent(trigger) {
+function extractWebhookReqBody(trigger) {
     retrieveMessageData.get(trigger.data.id)
     .then(resp => {
-        var tickerSymbol = "";
-        tickerSymbol = resp.text;
-        console.log(tickerSymbol)
+        retrieveCurrencyPrice.get(resp.text)
+        .then(resp => {
+            console.log(resp)
+        })
     })
     .catch(console.log);
-
-
-    //
-    // YOUR CODE HERE
-    //
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
 
 }
