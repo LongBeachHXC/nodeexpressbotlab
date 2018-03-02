@@ -83,7 +83,10 @@ app.listen(port, function () {
 function extractWebhookReqBody(trigger) {
     retrieveMessageData.get(trigger.data.id)
     .then(resp => {
-        console.log(resp);
+        retrieveCurrencyPrice.get(resp.text)
+        .then(resp => {
+            console.log(resp);
+        })
     })
     .catch(console.log);
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
