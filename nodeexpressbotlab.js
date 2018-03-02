@@ -26,7 +26,13 @@ var retrieveMessageData = new RequestClient({
 })
 
 var retrieveCurrencyPrice = new RequestClient({
-    "baseUrl": "https://api.coinmarketcap.com/v1/ticker/"
+    "baseUrl": "https://api.binance.com/api/v3/ticker/price?symbol="
+})
+
+var sendMessage = new RequestClient({
+    "baseUrl": "https://api.ciscospark.com/v1/messages"
+    "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
+
 })
 
 var started = Date.now();
@@ -79,10 +85,20 @@ function extractWebhookReqBody(trigger) {
     .then(resp => {
         retrieveCurrencyPrice.get(resp.text)
         .then(resp => {
-            console.log(resp[0])
+            sendMessage.post(resp.text, {
+                "toPersonId": trigger.data.personId,
+                "text" : resp.text
+            })
+            .catch(console.log)
         })
+        .catch(console.log)
     })
     .catch(console.log);
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
 
+}
+
+{
+    "toPersonId": "fdsafdsafdsafdsafsdaf",
+    "text": "fdafdafdafafdas"
 }
