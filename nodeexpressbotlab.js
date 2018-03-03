@@ -70,7 +70,7 @@ function extractWebhookReqBody(trigger) {
     if (trigger.data.roomType === "group") {
         console.log("roomType=group", trigger.data.id);
     } else if (trigger.data.roomType === "direct") {
-        DirectRoomResponse(trigger);
+        {apirequest.DirectRoomResponse(trigger)};
     }
 
 
