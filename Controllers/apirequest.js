@@ -17,24 +17,25 @@ let sendMessage = new RequestClient({
 const DirectRoomResponse = (trigger) => {
     retrieveMessageData.get(trigger.data.id)
     .then(currencySymbol => {
-        retrieveCurrencyPrice.get({"uri":"price",
+        retrieveCurrencyPrice.get({
+            "uri":"price",
             "query": {
                 "symbol": currencySymbol.text
             }
         })
         .then(currencyPrice => {
-            sendMessage.post("messages", {
-                "toPersonId": trigger.data.personId,
-                "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
-            })
-            .then(console.log);
-            })
+            sendMessage.post(
+                "messages", {
+                    "toPersonId": trigger.data.personId,
+                    "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
+                })
             .catch(console.log);
         })
         .catch(console.log);
     })
     .catch(console.log);
 }
+
 
 const GroupRoomResponse = (trigger) => {
     let currencyPair = "";
