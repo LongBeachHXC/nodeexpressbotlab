@@ -38,14 +38,14 @@ const DirectRoomResponse = (trigger) => {
 }
 
 const GroupRoomResponse = (trigger) => {
-    let currencyPair = ""
+    let currencyPair = "";
     retrieveMessageData.get(trigger.data.id)
     .then(currencySymbol =>  {
         currencyPair = currencySymbol.text.split(" ")[1]
         retrieveCurrencyPrice.get({"uri":"price",
             "query": {
                 "symbol": currencyPair
-            })
+            }
         .then(currencyPrice => {
             sendMessage.post("messages", {
                 "roomId": currencySymbol.roomId,
