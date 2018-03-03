@@ -52,7 +52,7 @@ const GroupRoomResponse = (trigger) => {
             sendMessage.post(
                 "messages", {
                     "roomId": currencySymbol.roomId,
-                    "markdown": "The current price for " + currencyPair " is " + currencyPrice.price
+                    "markdown": "The current price for " + currencyPair + " is " + currencyPrice.price
                 })
             .catch(console.log)
         })
