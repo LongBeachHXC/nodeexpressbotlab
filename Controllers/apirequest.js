@@ -72,54 +72,6 @@ const botMembershipAdd = trigger => {
     .catch(console.log)
 }
 
-
-
-//     retrieveMessageData.get(trigger.data.id)
-//     .then(currencySymbol =>  {
-//         currencyPair = currencySymbol.text.split(" ")[1]
-//         retrieveCurrencyPrice.get({"uri":"price",
-//             "query": {
-//                 "symbol": currencyPair
-//             }
-//         .then(currencyPrice => {
-//             sendMessage.post("messages", {
-//                 "roomId": currencySymbol.roomId,
-//                 "markdown": "Hello <@personEmail:" + currencySymbol.personEmail + ">, the curret price for currencty pair " + currencyPair + " is " + currencyPrice.price
-//             })
-//             .then(resp => {
-//                 console.log(resp)
-//             })
-//             .catch(console.log)
-//         })
-//         .catch(console.log)
-//     })
-//     .catch(console.log)
-// })
-// .catch(console.log)
-// }
-
-
-    // retrieveMessageData.get(trigger.data.id)
-    // .then(currencySymbol => {
-    //     retrieveCurrencyPrice.get({"uri":"price",
-    //         "query": {
-    //             "symbol": currencySymbol.text
-    //         }
-    //     })
-    //     .then(currencyPrice => {
-    //         sendMessage.post("messages", {
-    //             "toPersonId": trigger.data.personId,
-    //             "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
-    //         })
-    //         .then(resp => {
-    //             console.log(resp);
-    //         })
-    //         .catch(console.log);
-    //     })
-    //     .catch(console.log);
-    // })
-    // .catch(console.log);
-
 module.exports = {
     DirectRoomResponse,
     GroupRoomResponse,

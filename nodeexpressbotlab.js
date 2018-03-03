@@ -1,14 +1,3 @@
-//
-// Copyright (c) 2016 Cisco Systems
-// Licensed under the MIT License
-//
-
-
-/*
- * a Cisco Spark webhook based on pure Express.js.
- * goal here is to illustrate how to create a bot without leveraging more advanced framework libraries.
- */
-
 const express = require("express");
 const apirequest = require('./Controllers/apirequest');
 
@@ -75,9 +64,7 @@ function extractWebhookReqBody(trigger) {
         if (trigger.data.personEmail === 'cryptoCurrencyBot@sparkbot.io') {
             {apirequest.botMembershipAdd(trigger)};
         }
+    } else {
+        console.log(trigger);
     }
-
-
-    console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
-
 }
