@@ -10,9 +10,7 @@
  */
 
 const express = require("express");
-const retrieveMessageData = require('./Controllers/apirequest');
-const retrieveCurrencyPrice = require('./Controllers/apirequest');
-const sendMessage = require('./Controllers/apirequest');
+const DirectRoomResponse = require('./Controllers/apirequest');
 
 const app = express();
 
@@ -72,26 +70,7 @@ function extractWebhookReqBody(trigger) {
     if (trigger.data.roomType === "group") {
         console.log("roomType=group", trigger.data.id);
     } else if (trigger.data.roomType === "direct") {
-        retrieveMessageData.get(trigger.data.id)
-            .then(currencySymbol => {
-                retrieveCurrencyPrice.get({"uri":"price",
-                    "query": {
-                        "symbol": currencySymbol.text
-                    }
-                })
-                .then(currencyPrice => {
-                    sendMessage.post("messages", {
-                        "toPersonId": trigger.data.personId,
-                        "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
-                    })
-                    .then(resp => {
-                        console.log(resp);
-                    })
-                    .catch(console.log);
-                })
-                .catch(console.log);
-            })
-            .catch(console.log);
+        DirectRoomResponse(trigger);
     }
 
 

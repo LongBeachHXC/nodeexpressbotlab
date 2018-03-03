@@ -14,6 +14,29 @@ const sendMessage = new RequestClient({
     "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
 })
 
+const DirectRoomResponse (trigger) => {
+    retrieveMessageData.get(trigger.data.id)
+    .then(currencySymbol => {
+        retrieveCurrencyPrice.get({"uri":"price",
+            "query": {
+                "symbol": currencySymbol.text
+            }
+        })
+        .then(currencyPrice => {
+            sendMessage.post("messages", {
+                "toPersonId": trigger.data.personId,
+                "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
+            })
+            .then(resp => {
+                console.log(resp);
+            })
+            .catch(console.log);
+        })
+        .catch(console.log);
+    })
+    .catch(console.log);
+}
+
     // retrieveMessageData.get(trigger.data.id)
     // .then(currencySymbol => {
     //     retrieveCurrencyPrice.get({"uri":"price",
@@ -36,7 +59,5 @@ const sendMessage = new RequestClient({
     // .catch(console.log);
 
 module.exports = {
-    retrieveMessageData,
-    retrieveCurrencyPrice,
-    sendMessage
+    DirectRoomResponse
 }
