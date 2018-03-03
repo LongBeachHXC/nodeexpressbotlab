@@ -37,6 +37,11 @@ const DirectRoomResponse = (trigger) => {
     .catch(console.log);
 }
 
+const GroupRoomResponse = (trigger) => {
+    retrieveMessageData.get(trigger.data.id)
+    .then(console.log)
+}
+
     // retrieveMessageData.get(trigger.data.id)
     // .then(currencySymbol => {
     //     retrieveCurrencyPrice.get({"uri":"price",
@@ -59,5 +64,6 @@ const DirectRoomResponse = (trigger) => {
     // .catch(console.log);
 
 module.exports = {
-    DirectRoomResponse
+    DirectRoomResponse,
+    GroupRoomResponse
 }

@@ -68,7 +68,7 @@ app.listen(port, function () {
 // Invoked when the Spark webhook is triggered
 function extractWebhookReqBody(trigger) {
     if (trigger.data.roomType === "group") {
-        console.log("roomType=group", trigger.data.id);
+        {apirequest.GroupRoomResponse(trigger)};
     } else if (trigger.data.roomType === "direct") {
         {apirequest.DirectRoomResponse(trigger)};
     }
