@@ -45,7 +45,7 @@ const GroupRoomResponse = (trigger) => {
         retrieveCurrencyPrice.get({"uri":"price",
             "query": {
                 "symbol": currencyPair
-            }
+            })
         .then(currencyPrice => {
             sendMessage.post("messages", {
                 "roomId": currencySymbol.roomId,
