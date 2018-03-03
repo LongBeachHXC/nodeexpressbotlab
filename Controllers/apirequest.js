@@ -66,7 +66,7 @@ const botMembershipAdd = trigger => {
     sendMessage.post(
         "messages", {
             "roomId": roomId
-            "text": ```Hello Everyone, I am cryptoCurrencyBot. I am here in the background and will provide you the current price of a currency pair listed on the cryptocurrency exchange Binance. To ensure that I see your message please direct it @ me so that I know I am the one that should be responding to the message.\n\nFor now, I only accept one command and that is giving me a currency pair. For example if you are interested in the price of Ripple to Bitcoin the send me a message with XRPBTC or if you want the price returned in ethereum then send me a message with XRPETH.```
+            "text": `Hello Everyone, I am cryptoCurrencyBot. I am here in the background and will provide you the current price of a currency pair listed on the cryptocurrency exchange Binance. To ensure that I see your message please direct it @ me so that I know I am the one that should be responding to the message.\n\nFor now, I only accept one command and that is giving me a currency pair. For example if you are interested in the price of Ripple to Bitcoin the send me a message with XRPBTC or if you want the price returned in ethereum then send me a message with XRPETH.`
         })
     .catch(console.log)
 }
