@@ -42,7 +42,7 @@ const GroupRoomResponse = (trigger) => {
     .then(msgData =>  {
         retrieveCurrencyPrice.get({"uri":"price",
             "query": {
-                "symbol": resp.text.split(" ")[1]
+                "symbol": msgData.text.split(" ")[1]
             }
         .then(resp => {
             sendMessage.post("messages", {
