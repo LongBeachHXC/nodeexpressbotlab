@@ -37,6 +37,6 @@ const sendMessage = new RequestClient({
 
 module.exports = {
     retrieveMessageData,
-    retreveCurrencyPrice,
+    retrieveCurrencyPrice,
     sendMessage
 }
