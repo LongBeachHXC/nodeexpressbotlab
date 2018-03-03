@@ -50,11 +50,11 @@ const GroupRoomResponse = (trigger) => {
                 "markdown": "Hello <@personEmail:" + msgData.personId + ">, the curret price for currencty pair " + msgData.text.split(" ")[1] + " is " + resp.price
             })
             .then(resp => {
-                console.log(resp);
+                console.log(resp)
             })
-            .catch(console.log);
+            .catch(console.log)
         })
-        .catch(console.log);
+        .catch(console.log)
     })
     .catch(console.log)
 }
