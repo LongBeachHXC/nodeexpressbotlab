@@ -9,33 +9,21 @@
  * goal here is to illustrate how to create a bot without leveraging more advanced framework libraries.
  */
 
-var express = require("express");
-var RequestClient = require("reqclient").RequestClient;
+const express = require("express");
+const retrieveMessageData = require('./Controllers/apirequest');
+const retrieveCurrencyPrice = require('./Controllers/apirequest');
+const sendMessage = require('./Controllers/apirequest');
 
-var app = express();
+const app = express();
 
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var debug = require("debug")("samples");
+const debug = require("debug")("samples");
 
-var retrieveMessageData = new RequestClient({
-    "baseUrl": "https://api.ciscospark.com/v1/messages/",
-    "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
-})
+const started = Date.now();
 
-var retrieveCurrencyPrice = new RequestClient({
-    "baseUrl": "https://api.binance.com/api/v3/ticker/"
-})
-
-var sendMessage = new RequestClient({
-    "baseUrl": "https://api.ciscospark.com/v1/",
-    "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
-
-})
-
-var started = Date.now();
 app.route("/")
     // healthcheck
     .get(function (req, res) {
@@ -71,7 +59,7 @@ app.route("/")
 //
 // [WORKAROUND] in some container situation (ie, Cisco Shipped), we need to use an OVERRIDE_PORT to force our bot to start and listen to the port defined in the Dockerfile (ie, EXPOSE),
 // and not the PORT dynamically assigned by the host or scheduler.
-var port = process.env.OVERRIDE_PORT || process.env.PORT || 8080;
+const port = process.env.OVERRIDE_PORT || process.env.PORT || 8080;
 app.listen(port, function () {
     console.log("Cisco Spark Bot started at http://localhost:" + port + "/");
     console.log("   GET  / for health checks");
@@ -84,31 +72,29 @@ function extractWebhookReqBody(trigger) {
     if (trigger.data.roomType === "group") {
         console.log("roomType=group", trigger.data.id);
     } else if (trigger.data.roomType === "direct") {
-        console.log("roomType=direct", trigger.data.id);
+        retrieveMessageData.get(trigger.data.id)
+            .then(currencySymbol => {
+                retrieveCurrencyPrice.get({"uri":"price",
+                    "query": {
+                        "symbol": currencySymbol.text
+                    }
+                })
+                .then(currencyPrice => {
+                    sendMessage.post("messages", {
+                        "toPersonId": trigger.data.personId,
+                        "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
+                    })
+                    .then(resp => {
+                        console.log(resp);
+                    })
+                    .catch(console.log);
+                })
+                .catch(console.log);
+            })
+            .catch(console.log);
     }
 
 
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
 
 }
-
-    // retrieveMessageData.get(trigger.data.id)
-    // .then(currencySymbol => {
-    //     retrieveCurrencyPrice.get({"uri":"price",
-    //         "query": {
-    //             "symbol": currencySymbol.text
-    //         }
-    //     })
-    //     .then(currencyPrice => {
-    //         sendMessage.post("messages", {
-    //             "toPersonId": trigger.data.personId,
-    //             "text": "The current price for " + currencySymbol.text + " is " + currencyPrice.price
-    //         })
-    //         .then(resp => {
-    //             console.log(resp);
-    //         })
-    //         .catch(console.log);
-    //     })
-    //     .catch(console.log);
-    // })
-    // .catch(console.log);
