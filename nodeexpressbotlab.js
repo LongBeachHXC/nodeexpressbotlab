@@ -81,7 +81,13 @@ app.listen(port, function () {
 
 // Invoked when the Spark webhook is triggered
 function extractWebhookReqBody(trigger) {
-    console.log(trigger.data.id);
+    if (trigger.data.roomType === "group") {
+        console.log("roomType=group", trigger.data.id);
+    } else if (trigger.data.roomType === "direct") {
+        console.log("roomType=direct", trigger.data.id);
+    }
+
+
     console.log("EVENT: " + trigger.resource + "/" + trigger.event + "\n" + "with data id: " + trigger.data.id + "\n" + ", triggered by person id:" + trigger.actorId);
 
 }
