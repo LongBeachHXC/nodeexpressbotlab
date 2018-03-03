@@ -71,8 +71,8 @@ function extractWebhookReqBody(trigger) {
         {apirequest.GroupRoomResponse(trigger)};
     } else if (trigger.data.roomType === "direct") {
         {apirequest.DirectRoomResponse(trigger)};
-    } else {
-        console.log(trigger)
+    } else if (trigger.resource === 'mermberships' && trigger.event === 'created') {
+        console.log(trigger.dat)
     }
 
 
