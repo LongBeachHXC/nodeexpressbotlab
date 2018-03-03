@@ -39,7 +39,10 @@ const DirectRoomResponse = (trigger) => {
 
 const GroupRoomResponse = (trigger) => {
     retrieveMessageData.get(trigger.data.id)
-    .then(console.log)
+    .then(resp =>  {
+        let currencyPair = resp.text.split(" ")[1];
+        console.log(currencyPair);
+    })
 }
 
     // retrieveMessageData.get(trigger.data.id)
