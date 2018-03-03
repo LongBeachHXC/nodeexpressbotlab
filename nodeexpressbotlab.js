@@ -72,7 +72,9 @@ function extractWebhookReqBody(trigger) {
     } else if (trigger.data.roomType === "direct") {
         {apirequest.DirectRoomResponse(trigger)};
     } else if (trigger.resource === 'memberships' && trigger.event === 'created') {
-        console.log(trigger.data)
+        if (trigger.data.personEmail === 'cryptoCurrencyBot@sparkbot.io') {
+            console.log(trigger.data.roomId);
+        }
     }
 
 
