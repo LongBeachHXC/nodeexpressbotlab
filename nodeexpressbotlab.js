@@ -71,6 +71,8 @@ function extractWebhookReqBody(trigger) {
         {apirequest.GroupRoomResponse(trigger)};
     } else if (trigger.data.roomType === "direct") {
         {apirequest.DirectRoomResponse(trigger)};
+    } else if {
+        console.log(trigger)
     }
 
 
