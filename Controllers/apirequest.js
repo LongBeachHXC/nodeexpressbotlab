@@ -2,7 +2,7 @@ const RequestClient = require("reqclient").RequestClient;
 
 let retrieveMessageData = new RequestClient({
     "baseUrl": "https://api.ciscospark.com/v1/messages/",
-    "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
+    "headers": {"Authorization" : "Bearer NjEyYjlhZmUtOWRkMS00MjIyLWE4NjktZjM5OTIxZmYyZDE0NGYyMDQ0OWItODc5"}
 })
 
 let retrieveCurrencyPrice  = new RequestClient({
@@ -11,7 +11,7 @@ let retrieveCurrencyPrice  = new RequestClient({
 
 let sendMessage = new RequestClient({
     "baseUrl": "https://api.ciscospark.com/v1/",
-    "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
+    "headers": {"Authorization" : "Bearer NjEyYjlhZmUtOWRkMS00MjIyLWE4NjktZjM5OTIxZmYyZDE0NGYyMDQ0OWItODc5"}
 })
 
 const DirectRoomResponse = (trigger) => {
