@@ -14,7 +14,7 @@ const sendMessage = new RequestClient({
     "headers": {"Authorization" : "Bearer NThjMDczMDYtNjE5Yi00MTA4LWFlMjQtZTI0Yzc4NzQ3MDFmMWJlZDBkMzMtYzUy"}
 })
 
-const DirectRoomResponse (trigger) => {
+const DirectRoomResponse = (trigger) => {
     retrieveMessageData.get(trigger.data.id)
     .then(currencySymbol => {
         retrieveCurrencyPrice.get({"uri":"price",
