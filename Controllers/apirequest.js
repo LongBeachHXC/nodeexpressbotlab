@@ -47,7 +47,7 @@ const GroupRoomResponse = (trigger) => {
         .then(resp => {
             sendMessage.post("messages", {
                 "roomId": msgData.roomId,
-                "markdown": "Hello <@personEmail:" + msgData.personId + ">, the curret price for currencty pair " + msgData.text.split(" ")[1] + " is " + resp.price
+                "markdown": "Hello <@personEmail:" + msgData.personEmail + ">, the curret price for currencty pair " + msgData.text.split(" ")[1] + " is " + resp.price
             })
             .then(resp => {
                 console.log(resp)
@@ -57,7 +57,9 @@ const GroupRoomResponse = (trigger) => {
         .catch(console.log)
     })
     .catch(console.log)
+})
 }
+
 
     // retrieveMessageData.get(trigger.data.id)
     // .then(currencySymbol => {
