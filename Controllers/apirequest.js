@@ -38,16 +38,18 @@ const DirectRoomResponse = (trigger) => {
 }
 
 const GroupRoomResponse = (trigger) => {
+    let currencyPair = ""
     retrieveMessageData.get(trigger.data.id)
-    .then(msgData =>  {
+    .then(currencySymbol =>  {
+        currencyPair = currencySymbol.text.split(" ")[1]
         retrieveCurrencyPrice.get({"uri":"price",
             "query": {
-                "symbol": msgData.text.split(" ")[1]
+                "symbol": currencyPair
             }
-        .then(resp => {
+        .then(currencyPrice => {
             sendMessage.post("messages", {
-                "roomId": msgData.roomId,
-                "markdown": "Hello <@personEmail:" + msgData.personEmail + ">, the curret price for currencty pair " + msgData.text.split(" ")[1] + " is " + resp.price
+                "roomId": currencySymbol.roomId,
+                "markdown": "Hello <@personEmail:" + currencySymbol.personEmail + ">, the curret price for currencty pair " + currencyPair + " is " + currencyPrice.price
             })
             .then(resp => {
                 console.log(resp)
@@ -58,6 +60,7 @@ const GroupRoomResponse = (trigger) => {
     })
     .catch(console.log)
 })
+.catch(console.log)
 }
 
 
